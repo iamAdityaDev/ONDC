@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
-import { translateProducts } from './index';
+// import { translateProducts } from './index';
 import Product from './Product';
 
 export default function Navbar() {
@@ -25,21 +25,21 @@ export default function Navbar() {
     setLanguage(lan);
   };
 
-  const handleClick = async () => {
-    setIsClicked(!isClicked);
-    if (!isClicked) {
-      try {
-        const translatedProducts = await Promise.all(products.map(async (product) => {
-          const translatedProduct = await translateProducts(language, product);
-          return translatedProduct;
-        }));
-        setProducts(translatedProducts);
-      } catch (error) {
-        console.error('Error translating products:', error);
-        // Display an error message to the user
-      }
-    }
-  };
+  // const handleClick = async () => {
+  //   setIsClicked(!isClicked);
+  //   if (!isClicked) {
+  //     try {
+  //       const translatedProducts = await Promise.all(products.map(async (product) => {
+  //         const translatedProduct = await translateProducts(language, product);
+  //         return translatedProduct;
+  //       }));
+  //       setProducts(translatedProducts);
+  //     } catch (error) {
+  //       console.error('Error translating products:', error);
+  //       // Display an error message to the user
+  //     }
+  //   }
+  // };
 
   return (
     <div className='flex p-3 bg-blue-950 text-white justify-between px-12'>
@@ -48,7 +48,7 @@ export default function Navbar() {
         <input type='text' placeholder='search' className='w-[500px] p-1 rounded-sm' />
       </form>
       <div>
-        <button onClick={handleClick} className='flex items-center gap-1'>
+        <button className='flex items-center gap-1'>
           {language} <FaChevronDown />
         </button>
         {isClicked && (
