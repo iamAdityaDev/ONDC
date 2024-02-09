@@ -1,51 +1,40 @@
 // import { GoogleGenerativeAI } from '@google/generative-ai';
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const { CohereClient } = require('cohere-ai');
 
-const API_KEY = 'AIzaSyC0aRuYnxBm-wNn5PGsjO2O_M9IFz87GA8';
+const cohere = new CohereClient({
+    token: "p57Ii2VsCWRzihocNtIl2yAiUQvO22euvjbaXECM", // This is your trial API key
+  });
 
-const genAI = new GoogleGenerativeAI(API_KEY);
+// const API_KEY = 'AIzaSyC0aRuYnxBm-wNn5PGsjO2O_M9IFz87GA8';
+
+// const genAI = new GoogleGenerativeAI(API_KEY);
 
 async function translateProducts(language, productData) {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    // const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
     for (const product of productData) {
       const { heading, desc, price } = product;
 
-      const prompt = `Translate the following product details into ${language}:
+      const response = await cohere.generate({
+        model: "command",
+        prompt: `Translate the following product details into ${language}:
         Heading: ${heading}
         Description: ${desc}
         Price: ${price}
-
-        Maintain the original product title case and ensure the translated description is concise and clear.
         
-        The structure of the output should be as follows
-        image: {same}
-        heading: {translated heading}
-        desc: {translated description}
-        price: {translated price}
+        Give the final product details in ${language} only.
+        `,
+        maxTokens: 300,
+        temperature: 0.9,
+        k: 0,
+        stopSequences: [],
+        returnLikelihoods: "NONE"
+      });
 
-        Replace the variable in {} with it's proper value
-        
-        for example: 
-        for the product 
-        // image: Shirt,
-        heading: "TURMS",
-        desc: "TURMS Men's Crimson Maroon Cotton Blend Mandarin Collar Shirt, Anti Stain & Anti Odor, Comfortable, Water Repellent, Stylish, Casual, Business Work, Party",
-        price: "₹1,999"
-
-        The output should be - 
-        // image: Shirt,
-        heading: "टर्म्स",
-        desc: "टर्म्स पुरुषांचे क्रिमसन मरून कॉटन ब्लेंड मंदारिन कॉलर शर्ट, एंटी स्टेन आणि एंटी गंध, आरामदायक, पाण्याला टिकणारा, स्टाइलिश, कॅज्युअल, व्यवसायिक काम, पार्टी"
-        price: "₹ १,९९९"
-        
-        Do this for each and every product in the language mentioned at that time. Do not miss any product`;
-
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const translatedText = response.text();
+      const translatedText = response.generations[0].text;
       
+    //   console.log(prompt)
       console.log(heading)
 
       console.log(translatedText)
