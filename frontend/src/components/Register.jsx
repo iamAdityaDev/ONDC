@@ -40,7 +40,7 @@ function RegisterProduct() {
   const handleRegister = () => {
     const { heading, desc, brand, price, warranty, offline, shipment, availability } = productInfo;
   
-    axios.post('http://localhost:5000/api/addProduct', {
+    axios.post('https://backend-catalogue.onrender.com/api/addProduct', {
       heading,
       desc,
       price,

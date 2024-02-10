@@ -7,7 +7,7 @@ export default function Product() {
 
     useEffect(() => {
         // Fetch products from backend when the component mounts
-        axios.get('http://localhost:5000/api')
+        axios.get('https://backend-catalogue.onrender.com/api')
             .then(response => {
                 // Set the products state with the data received from the backend
                 setProducts(response.data);
