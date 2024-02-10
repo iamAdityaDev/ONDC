@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import Product from './Product';
 import Register from './Register';
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 
 export default function Navbar() {
   const [products, setProducts] = useState([]);
-  // const [isRegisterClicked, setIsRegisterClicked] = useState(false);
 
   useEffect(() => {
     async function fetchInitialProducts() {
@@ -24,7 +24,6 @@ export default function Navbar() {
 
 
   const handleRegisterProduct = () => {
-    // setIsRegisterClicked(true);
     let container = document.getElementById('container_id');
     container.style.display = 'flex';
   };
@@ -34,7 +33,7 @@ export default function Navbar() {
     <Register/>
     <div className='navbar'>
       <h1 className='nav_head'>Catalogue Scoring</h1>
-      <button className='register-product-btn' onClick={handleRegisterProduct}>
+      <button className='register-product-btn' onClick={handleRegisterProduct}><AppRegistrationIcon className='regis_image'/>
         Register Product
       </button>
       

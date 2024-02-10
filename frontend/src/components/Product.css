@@ -1,32 +1,39 @@
 .product-container {
     z-index: 1;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     margin-top: 100px;
     margin-left: 45px;
 }
-
 .product-card {
-    width: 320px;
-    height: 210px;
+    width: 93%;
+    min-height: 245px;
     margin: 20px;
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     cursor: pointer;
-    border-radius: 3px;
-    border:solid 2px rgb(220, 220, 220);
-    background-color: #f4f4f4; /* Light grey background */
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    transition: all 0.3s ease; /* Smooth transition on hover */
+    border-radius: 7px;
+    border:solid 1px rgb(209, 209, 209);
+    background-color: #ffffff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    transition: all 0.2s ease;
 }
-
+.product-shipment
+{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: rgb(81, 81, 81);
+}
+.product-warranty
+{
+    color: rgb(81, 81, 81);
+}
 .product-card:hover {
     z-index: 1;
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.08);
-    background-color: #ebebeb; /* Darker grey background on hover */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0), 0 2px 4px rgba(0, 0, 0, 0.08);
+    background-color: #ebebeb;
 }
 
 .product-image {
@@ -37,25 +44,30 @@
     font-size: 1rem;
     font-weight: bold;
     margin-top: 0.5rem;
-    color: #777777; /* Dark grey text */
+    color: #777777;
+}
+.product-heading:hover{
+    color: rgb(95, 95, 233);
 }
 .product-brand {
     font-size: 1.7rem;
     font-weight: bold;
-    margin-top: 0.5rem;
-    color: #4b4b4b; /* Dark grey text */
+    margin-top: 0px;
+    color: #4b4b4b;
+    margin-bottom: 15px;
 }
 .product-desc {
     margin-top: 0.25rem;
     color: #555;
-    font-size: 0.88rem;
+    font-size: 0.92rem;
 }
 
 .product-price {
     font-size: 1.3rem;
     /* font-weight: bold; */
     margin-top: 0.25rem;
-    color: #222; /* Slightly darker grey text for price */
+    color: #222;
+    margin-bottom: 15px;
 }
 @media (max-width: 700px) {
     .product-container {

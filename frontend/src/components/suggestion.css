@@ -1,0 +1,54 @@
+.twoc
+{
+    z-index: 50;
+}
+.suggest_head
+{
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgb(71, 71, 71);
+}
+.suggest{
+    font-weight: 400;
+    font-size: 0.9rem;
+    color: rgb(109, 109, 109);
+}
+.header_register
+{
+    display: flex;
+    flex-direction: row;
+}
+.back_suggest
+{
+    height: 30px;
+    width: 70px;
+    padding-top: 2px;
+    position: relative;
+    top:11px;
+    left:131px;
+}
+.next_to_suggest
+{
+    margin-top: 14px;
+}
+.dialogue
+{
+    font-size: 0.93rem;
+}
+@media (max-width: 700px) {
+    .container {
+      position: fixed;
+      top: 130px;
+      right: 0;
+      max-width: 350px;
+    }
+    .back_suggest
+    {
+      height: 30px;
+      width: 70px;
+      padding-top: 2px;
+      position: relative;
+      top:10px;
+      left: 77px;
+    }
+  }

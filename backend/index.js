@@ -13,6 +13,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.get('/',(req,res)=>{
+  res.status(200).send('Welcome to Catalogue Scoring - ONDC backend!');
+});
+
 app.get('/api/', (req, res) => {
   try {
     // Read products from the JSON file
@@ -72,12 +76,127 @@ app.post('/api/addProduct', async (req, res) => {
     let products = JSON.parse(data);
 
     // Append new product to the array
-    products.push({ heading, desc, price, brand, score });
+    products.push({ heading, desc, price, brand, score, warranty, offline, shipment });
 
     // Write the updated array back to the JSON file
     fs.writeFileSync('../frontend/src/assets/products.json', JSON.stringify(products, null, 2), 'utf8');
 
     res.status(200).send('Product added successfully');
+  } catch (error) {
+    console.error('Error adding product:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.post('/api/suggestName', async(req,res) => {
+  const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
+  try {
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const prompt = `Consider the following data of a product:
+    heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
+
+    Give me in one line suggestions regarding the heading.
+    `
+
+    const result = await model.generateContent(prompt);
+    const generatedResponse = await result.response;
+
+    res.status(200).send(generatedResponse.text());
+  } catch (error) {
+    console.error('Error adding product:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+app.post('/api/suggestDesc', async(req,res) => {
+  const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
+  try {
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const prompt = `Consider the following data of a product:
+    heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
+
+    Give me in one line suggestions regarding the description.
+    `
+
+    const result = await model.generateContent(prompt);
+    const generatedResponse = await result.response;
+
+    res.status(200).send(generatedResponse.text());
+  } catch (error) {
+    console.error('Error adding product:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+app.post('/api/suggestPrice', async(req,res) => {
+  const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
+  try {
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const prompt = `Consider the following data of a product:
+    heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
+
+    Give me in one line suggestions regarding the price.
+    `
+
+    const result = await model.generateContent(prompt);
+    const generatedResponse = await result.response;
+
+    res.status(200).send(generatedResponse.text());
+  } catch (error) {
+    console.error('Error adding product:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+app.post('/api/suggestWarranty', async(req,res) => {
+  const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
+  try {
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const prompt = `Consider the following data of a product:
+    heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
+
+    Give me in one line suggestions regarding the warranty.
+    `
+
+    const result = await model.generateContent(prompt);
+    const generatedResponse = await result.response;
+
+    res.status(200).send(generatedResponse.text());
+  } catch (error) {
+    console.error('Error adding product:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+app.post('/api/suggestOffline', async(req,res) => {
+  const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
+  try {
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const prompt = `Consider the following data of a product:
+    heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
+
+    Give me in one line suggestions regarding the offline assistance.
+    `
+
+    const result = await model.generateContent(prompt);
+    const generatedResponse = await result.response;
+
+    res.status(200).send(generatedResponse.text());
+  } catch (error) {
+    console.error('Error adding product:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+app.post('/api/suggestShipment', async(req,res) => {
+  const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
+  try {
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const prompt = `Consider the following data of a product:
+    heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
+
+    Give me in one line suggestions regarding the shipment details.
+    `
+
+    const result = await model.generateContent(prompt);
+    const generatedResponse = await result.response;
+
+    res.status(200).send(generatedResponse.text());
   } catch (error) {
     console.error('Error adding product:', error);
     res.status(500).send('Internal Server Error');

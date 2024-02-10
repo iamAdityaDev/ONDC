@@ -4,9 +4,9 @@
   width: 100%;
   display: flex;
   height: 75px;
-  align-items: center; /* Center items vertically */
+  align-items: center;
   padding: 1rem;
-  background-color: #002366; /* Dark blue background */
+  background-color: #002366;
   color: white;
   justify-content: space-between;
   padding-left: 12px;
@@ -19,13 +19,26 @@
     font-weight: 500;
     color: rgb(213, 213, 213);
     margin-left: 10px;
+    margin-top: -5px;
+}
+.regis_image
+{
+    opacity: 0.9;
+    margin-right: 3px;
+    margin-left: -4px;
 }
 .register-product-btn
 {
-  background-color: #0044c3d8;
+  background-color: #002366;
+  border: solid 1px white;
   position: relative;
   top: 9px;
   margin-right: 5px;
+  color: white;
+}
+.register-product-btn:hover
+{
+  background-color: #001b4e;
 }
 @media (max-width: 700px) {
   .product-container {

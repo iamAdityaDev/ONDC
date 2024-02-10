@@ -1,8 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
 import './Register.css';
+import Suggestion from './suggestion';
+
 
 function RegisterProduct() {
+  const [headingInfo, setHeadingInfo] = useState('');
+  const [descInfo, setDescInfo] = useState('');
+  const [priceInfo, setPriceInfo] = useState('');
+  const [warrantyInfo, setWarrantyInfo] = useState('');
+  const [offlineInfo, setOfflineInfo] = useState('');
+  const [shipmentInfo, setShipmentInfo] = useState('');
+  const [brandInfo, setBrandInfo] = useState('');
+
   const [productInfo, setProductInfo] = useState({
     heading: '',
     desc: '',
@@ -17,17 +27,12 @@ function RegisterProduct() {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    let container2 = document.getElementById('suggestion_id');
+    container2.style.display = 'none';
+    let container = document.getElementById('container_id');
+    container.style.display = 'flex';
   }, []);
 
-  const handleClickOutside = (event) => {
-    if (containerRef.current && !containerRef.current.contains(event.target)) {
-      closeContainer();
-    }
-  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -37,56 +42,86 @@ function RegisterProduct() {
     }));
   };
 
-  const handleRegister = () => {
-    const { heading, desc, brand, price, warranty, offline, shipment, availability } = productInfo;
-  
-    axios.post('https://backend-catalogue.onrender.com/api/addProduct', {
-      heading,
-      desc,
-      price,
-      brand, // Ensure the name matches the backend (brand instead of productName)
-      warranty,
-      offline,
-      shipment,
-      availability
-    }) // POST request using Axios
-      .then(response => {
-        console.log('Product added successfully:', response.data);
-        closeContainer();
-        window.location.reload();
-        console.log('Product Info:', productInfo);
-        // Optionally, you can clear the form after successful submission
-        setProductInfo({
-          heading: '',
-          desc: '',
-          brand: '',
-          price: '',
-          availability: false,
-          warranty: '',
-          offline: '',
-          shipment: ''
-        });
-      })
-      .catch(error => {
-        console.error('Error adding product:', error);
-      });
-  };
-  
-  const closeContainer = () => {
-    let container = document.getElementById('container_id');
-    if (container) {
-      container.style.display = "none";
+  const fetchHeadingInfo = async() => {
+    try {
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestName', productInfo);
+      setHeadingInfo(response.data);
+    } catch (error) {
+      console.log(error);
     }
   };
+  const fetchDescInfo = async() => {
+    try {
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestDesc', productInfo);
+      setDescInfo(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchPriceInfo = async() => {
+    try {
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestPrice', productInfo);
+      setPriceInfo(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchWarrantyInfo = async() => {
+    try {
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestWarranty', productInfo);
+      setWarrantyInfo(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchOfflineInfo = async() => {
+    try {
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestOffline', productInfo);
+      setOfflineInfo(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchShipmentInfo = async() => {
+    try {
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestShipment', productInfo);
+      setShipmentInfo(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const register_back=()=>{
+    let container = document.getElementById('container_id');
+    container.style.display = 'none';
+  }
+
+  const handleNext = async () => {
+    // await handleRegister(); // Wait for registration process to complete
+    const { heading, desc, brand, price, warranty, offline, shipment, availability } = productInfo;
+    setHeadingInfo(heading);
+    setDescInfo(desc);
+    setBrandInfo(brand);
+    setPriceInfo(price);
+    setWarrantyInfo(warranty);
+    setOfflineInfo(offline);
+    setShipmentInfo(shipment);
+    let container = document.getElementById('container_id');
+    container.style.display = 'flex';
+    let container2 = document.getElementById('suggestion_id');
+    container2.style.display = 'flex';
+  };
+  
 
   return (
     <div id='container_id' className='container' ref={containerRef}>
       <div className="header_register">
         <p className="head_text">Register your Product</p>
+        <button onClick={register_back} className="regis_back">Back</button>
       </div>
-      <label>
+      <label >
         Product Name:
         <input
+          required
           type="text"
           name="heading"
           value={productInfo.heading}
@@ -163,7 +198,8 @@ function RegisterProduct() {
         />
       </label>
 
-      <button className='submit_but' onClick={handleRegister}>Register</button>
+      <button className='submit_but' onClick={() => { handleNext(); fetchDescInfo(); fetchHeadingInfo(); fetchOfflineInfo(); fetchPriceInfo(); fetchShipmentInfo(); fetchWarrantyInfo(); }}>Next</button>
+      <Suggestion heading={headingInfo} desc={descInfo} brand={brandInfo} price={priceInfo} warranty={warrantyInfo} shipment={shipmentInfo} offline={offlineInfo} productInfo={productInfo} />
     </div>
   );
 }

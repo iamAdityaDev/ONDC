@@ -23,12 +23,13 @@ export default function Product() {
         <div className='product-container'>
             {products.map((product, index) => (
                 <div key={index} className='product-card'>
-                    {/* <img src={product.image} className='product-image' alt={product.heading} /> */}
                     <p className='product-heading'>{product.heading}</p>
                     <p className='product-brand'>{product.brand}</p>
                     <p className='product-desc'>Details : {product.desc}</p>
                     <h2 className='product-price'>Price : {product.price}</h2>
-                    {/* <h2 className='product-score'>{product.score}</h2> */}
+                    <p className='product-warranty'><b>Warranty</b> : {product.warranty}</p>
+                    <p className='product-shipment'><b>Shipment</b> : {product.shipment}</p>
+                    {/* <h2 className='product-score'>Overall Score : {product.score}</h2> */}
                 </div>
             ))}
         </div>

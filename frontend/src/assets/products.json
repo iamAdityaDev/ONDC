@@ -19,5 +19,22 @@
     "price": "41,999",
     "brand": "Samsung",
     "score": "5.9"
+  },
+  {
+    "heading": "Phone",
+    "desc": "good",
+    "price": "2134214312312",
+    "brand": "Apple",
+    "score": "6.8"
+  },
+  {
+    "heading": "Smart Phone",
+    "desc": "jnhewbcjchbdsjhcbhjds",
+    "price": "41000",
+    "brand": "Samsung",
+    "score": "6.2",
+    "warranty": "Lifetime",
+    "offline": "Yess",
+    "shipment": "International"
   }
 ]
