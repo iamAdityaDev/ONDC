@@ -1,0 +1,149 @@
+
+.container {
+    z-index: 3;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    max-width: 400px;
+    overflow-y: scroll;
+    margin: 0 auto;
+    padding: 21px;
+    padding-left: 28px;
+    border: 1px solid #cdcdcd;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    position: fixed;
+    top: 150px;
+    right: 0;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .avail
+  {
+    font-size: 1.05rem;
+    margin-top: 12px;
+    margin-bottom: 30px;
+    position: relative;
+    left: 3px;
+  }
+  input[type='text'],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  input[type='checkbox'] {
+    margin-right: 5px;
+  }
+  .check_box
+  {
+    height: 19px;
+    width: 19px;
+    position: relative;
+    left: 10px;
+    top:4px
+  }
+  button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+.head_text
+{
+    font-size: 1.35rem;
+    font-weight: 500;
+    position: relative;
+    top: 7px;
+    left: 0px;
+    margin-bottom: 40px;
+}
+.back_but
+{
+    height: 30px;
+    width: 75px;
+    background-color: rgb(234, 234, 234);
+    color: rgb(96, 96, 96);
+    border:solid 1px rgb(183, 183, 183);
+    border-radius: 2px;
+    font-size: 1.05rem;
+    position: relative;
+    left: 258px;
+    top:-21px;
+    padding-top: 1px;
+}
+.back_but:hover
+{
+    background-color: rgb(218, 218, 218);
+    color: rgb(79, 79, 79);
+}
+.submit_but
+{
+    margin-top: 20px;
+}
+.container::-webkit-scrollbar {
+  width: 5px; /* width of the scrollbar */
+}
+
+/* Track */
+.container::-webkit-scrollbar-track {
+  background: transparent; /* color of the track */
+}
+
+/* Handle */
+.container::-webkit-scrollbar-thumb {
+  background: #bababa; /* color of the scrollbar handle */
+  border-radius: 5px; /* roundness of the scrollbar handle */
+}
+
+/* Handle on hover */
+.container::-webkit-scrollbar-thumb:hover {
+  background: #555; /* color of the scrollbar handle on hover */
+}
+@media (max-width: 700px) {
+  .container {
+    position: fixed;
+    top: 130px;
+    right: 0;
+    max-width: 350px;
+  }
+  .back_but
+  {
+      height: 30px;
+      width: 75px;
+      background-color: white;
+      color: rgb(126, 126, 126);
+      border:solid 1px white;
+      border-radius: 2px;
+      font-size: 1.05rem;
+      padding-top: 1px;
+      position: relative;
+      left: 233px;
+      top:-18px;
+      padding-top: 1px;
+  }
+}
+@media (max-height: 600px) {
+  .container {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    max-width: 350px;
+  }
+}

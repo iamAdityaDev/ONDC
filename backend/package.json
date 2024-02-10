@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "@google/generative-ai": "^0.2.0",
-    "cohere-ai": "^7.7.5"
+    "body-parser": "^1.20.2",
+    "cohere-ai": "^7.7.5",
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
   }
 }
