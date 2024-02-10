@@ -25,7 +25,7 @@
 {
     opacity: 0.9;
     margin-right: 3px;
-    margin-left: -4px;
+    margin-left: -6px;
 }
 .register-product-btn
 {
@@ -44,12 +44,23 @@
   .product-container {
       margin-left: 15px;
   }
+  .nav_head
+  {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: rgb(213, 213, 213);
+      margin-left: 10px;
+      margin-top: -5px;
+  }
   .register-product-btn
   {
-    margin-right: 0px;
+    font-size: 0.85rem;
+    margin-right: -7px;
   }
   .nav_head
   {
-      margin-left: 3px;
+      margin-left: 0px;
+      font-size: 1rem;
+      margin-right: 10px;
   }
 }
