@@ -40,32 +40,149 @@ app.post('/api/addProduct', async (req, res) => {
     // Generate score using AI model
     const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
     const prompt = `Provide an overall score for the product on a scale of 1 to 10. 
-        The score should incorporate various attributes provided in a product carrying information: heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}, and availability: ${availability}., ensuring accuracy to differentiate and rank similar products. Consider the following constraints while generating the score:
-        1)Exclude irrelevant attributes for specific products. For instance, clothing products do not require warranty information.
-        2)Ensure the price is practical. For example, a bottle priced at 10,000 rupees would not be considered economical.
-        3)Product description should be comprehensive and informative.
-        4)Products requiring warranty should have precise warranty information. For instance, electronics should specify whether the warranty covers software and hardware.
-        5)Consider offline assistance as a key factor, particularly targeting customers who prefer traditional offline support over online services.
-         If there is
-          1)irrelevant information about the attribute
-          2)incomplete information
-          3) no offline assistance
-           then score must be very low as it doesnt even matches the hygine of the information provided under the product
-           At final you have to mark every attribute some score like this 
-          For Example :
-          -Availibility
-          - Description: 1.5/10
-          - Brand: 7/10
-          - Price: 6.5/10
-          - Warranty Information : 3/10(If needed as per product)
-          - Offline Assistance: 7/10
-          - Shipment Details: 9/10 (assuming standard shipping options are available)
-          - Availibilty
-          then calculate overall score by taking average of all these
-          **Note: Score should be of the format--> 2.1, 4, 7.8 like this.., and Score may contain decimal numbers to produce a more precise score and
-         evaluate score by strictly judging all the factors correctly
-         No need to print anything other than this Score should be of the format--> 2.1, 4 like this..
-         Do not print anything other than the score. Just a final floating point number.`;
+
+        The score should incorporate various attributes provided in a product carrying information: heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}, and availability: ${availability}., ensuring accuracy to differentiate and rank similar productsThe scoring process must adhere to a specific priority order:
+
+        Product Description and Name: This is the most crucial factor in determining the score. The comprehensiveness and informativeness of the product description significantly impact the rating. A clear and detailed description helps customers understand the product better, leading to a higher score.
+        
+        Price: The pricing of the product plays a significant role in its overall score. It's essential to ensure that the price is practical and reasonable. Unrealistically high prices can negatively affect the score, while competitive pricing can lead to a higher rating.
+        
+        Warranty Information: For products that require a warranty, precise warranty information is vital. Customers need to know the duration of the warranty and what it covers, particularly for electronics where coverage for both software and hardware is essential. Clear warranty terms contribute positively to the product score.
+        
+        Shipment Details: The details regarding shipment, including whether it's local or international, impact the overall convenience of purchasing the product. Quick and reliable shipment options contribute positively to the score, while complicated or slow delivery processes may lower it.
+        
+        Offline Assistance: Consideration of offline assistance is crucial, especially for customers who prefer traditional support channels over online services. Availability of offline assistance, such as in-person support or store assistance, can enhance the overall customer experience and influence the product score positively.
+        
+        Constraints to consider while generating the score:
+
+        Details that is provided in fields like product Description, offline Assistance, warranty... evaluate accordingly that are they sufficient? !!,
+        
+        Exclude irrelevant attributes: Ensure that attributes irrelevant to specific products are excluded from the evaluation. For instance, clothing products do not require warranty information, so it should not affect their score.
+        
+        Ensure practical pricing: Verify that the price of the product is practical and realistic. Products with unreasonably high prices should receive a lower score.
+        
+        Comprehensive product description: Evaluate the completeness and informativeness of the product description. A detailed description should lead to a higher score, while incomplete or vague descriptions may lower it.
+        
+        Precise warranty information: Products requiring warranty coverage should provide precise details about the warranty terms. For electronics, it's essential to specify whether the warranty covers software, hardware, or both.
+        
+        Consider offline assistance: Take into account the availability of offline assistance, particularly for customers who prefer traditional support channels. Products offering offline assistance options should receive a higher score.
+
+        Also take reference to this data
+
+        {
+          "heading": "Dell XPS 13 Laptop",
+          "desc": "13.4 inch FHD+ InfinityEdge Display, Intel Core i7, 16GB RAM, 512GB SSD, Windows 11",
+          "price": "120000",
+          "brand": "Dell",
+          "score": "8.5",
+          "warranty": "Yes, 3 years warranty",
+          "offline": "Yes",
+          "shipment": "Local"
+        },
+        {
+          "heading": "Lenovo ThinkPad X1 Carbon",
+          "desc": "14 inch 4K HDR Display, Intel Core i5, 16GB RAM, 512GB SSD, Windows 11 Pro",
+          "price": "135000",
+          "brand": "Lenovo",
+          "score": "8.2",
+          "warranty": "Yes, 5 years warranty",
+          "offline": "Yes",
+          "shipment": "International"
+        },
+        {
+          "heading": "HP Spectre x360 Convertible Laptop",
+          "desc": "15.6 inch 4K OLED Touchscreen, Intel Core i9, 32GB RAM, 1TB SSD, Windows 11",
+          "price": "180000",
+          "brand": "HP",
+          "score": "9.0",
+          "warranty": "Yes, 2 years warranty",
+          "offline": "No",
+          "shipment": "Local"
+        },
+        {
+          "heading": "Asus ROG Zephyrus G14 Gaming Laptop",
+          "desc": "14 inch QHD Display, AMD Ryzen 9, 32GB RAM, 1TB SSD, NVIDIA GeForce RTX 3080",
+          "price": "200000",
+          "brand": "Asus",
+          "score": "9.5",
+          "warranty": "Yes, 2 years warranty",
+          "offline": "Yes",
+          "shipment": "International"
+        },
+        {
+          "heading": "Microsoft Surface Laptop 4",
+          "desc": "13.5 inch PixelSense Touchscreen, Intel Core i7, 16GB RAM, 512GB SSD, Windows 11 Pro",
+          "price": "150000",
+          "brand": "Microsoft",
+          "score": "8.7",
+          "warranty": "Yes, 4 years warranty",
+          "offline": "No",
+          "shipment": "Local"
+        },
+        {
+          "heading": "Razer Blade 15 Gaming Laptop",
+          "desc": "15.6 inch FHD Display, Intel Core i7, 16GB RAM, 1TB SSD, NVIDIA GeForce RTX 3070",
+          "price": "170000",
+          "brand": "Razer",
+          "score": "9.2",
+          "warranty": "Yes, 2 years warranty",
+          "offline": "Yes",
+          "shipment": "International"
+        },
+        {
+          "heading": "Samsung Galaxy Book Pro 360",
+          "desc": "15.6 inch AMOLED Touchscreen, Intel Core i7, 16GB RAM, 1TB SSD, Windows 11",
+          "price": "160000",
+          "brand": "Samsung",
+          "score": "8.8",
+          "warranty": "Yes, 3 years warranty",
+          "offline": "No",
+          "shipment": "Local"
+        },
+        {
+          "heading": "LG Gram 17 Laptop",
+          "desc": "17 inch WQXGA IPS Display, Intel Core i5, 16GB RAM, 512GB SSD, Windows 11",
+          "price": "140000",
+          "brand": "LG",
+          "score": "8.0",
+          "warranty": "Yes, 2 years warranty",
+          "offline": "Yes",
+          "shipment": "International"
+        },
+        {
+          "heading": "Gaming Laptop",
+          "desc": "Very fast and smooth",
+          "price": "67,999 Rs",
+          "brand": "MSI",
+          "score": "3.8",
+          "warranty": "1 year",
+          "offline": "yes",
+          "shipment": ""
+        }
+        {
+          "heading": "Huawei MateBook X Pro Laptop",
+          "desc": "13.9 inch 3K Touchscreen, Intel Core i7, 16GB RAM, 1TB SSD, Windows 11",
+          "price": "170000",
+          "brand": "Huawei",
+          "score": "8.3",
+          "warranty": "Yes, 2 years warranty",
+          "offline": "No",
+          "shipment": "Local"
+        },
+        {
+          "heading": "laptop",
+          "desc": "good",
+          "price": "89,999 Rs",
+          "brand": "Huwawe",
+          "score": "2.3",
+          "warranty": "1 year",
+          "offline": "yes",
+          "shipment": ""
+        }
+        
+        Output the final score in the format: 2.1, 4, 7.8, etc., where decimal numbers may be used for precision in the scoring process.
+        
+        **Note : You just have to strictly generate a score from 1-10 as a number as in the format of (2.1, 4, 7.8), no other characters should be there, from the format that I suggested.`;
 
     const result = await model.generateContent(prompt);
     const generatedResponse = await result.response;
@@ -95,7 +212,7 @@ app.post('/api/suggestName', async(req,res) => {
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
 
-    Give me in one line suggestions regarding the heading.
+    Identify limitations in this product and suggest improvements that can be made in product name by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
     `
 
     const result = await model.generateContent(prompt);
@@ -114,7 +231,7 @@ app.post('/api/suggestDesc', async(req,res) => {
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
 
-    Give me in one line suggestions regarding the description.
+    Identify limitations in this product and suggest improvements that can be made in product Description by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
     `
 
     const result = await model.generateContent(prompt);
@@ -132,8 +249,7 @@ app.post('/api/suggestPrice', async(req,res) => {
     const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
-
-    Give me in one line suggestions regarding the price.
+    Identify limitations in this product and suggest improvements that can be made in product pricing by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
     `
 
     const result = await model.generateContent(prompt);
@@ -145,6 +261,7 @@ app.post('/api/suggestPrice', async(req,res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
 app.post('/api/suggestWarranty', async(req,res) => {
   const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
   try {
@@ -152,7 +269,7 @@ app.post('/api/suggestWarranty', async(req,res) => {
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
 
-    Give me in one line suggestions regarding the warranty.
+    Identify limitations in this product and suggest improvements that can be made in product warranty by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
     `
 
     const result = await model.generateContent(prompt);
@@ -171,7 +288,7 @@ app.post('/api/suggestOffline', async(req,res) => {
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
 
-    Give me in one line suggestions regarding the offline assistance.
+    Identify limitations in this product and suggest improvements that can be made in offline assistance of the product by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
     `
 
     const result = await model.generateContent(prompt);
@@ -190,7 +307,7 @@ app.post('/api/suggestShipment', async(req,res) => {
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
 
-    Give me in one line suggestions regarding the shipment details.
+    Identify limitations in this product and suggest improvements that can be made in product shipment by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
     `
 
     const result = await model.generateContent(prompt);

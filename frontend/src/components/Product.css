@@ -68,7 +68,14 @@
     margin-bottom: 15px;
     font-weight: 500;
 }
-.product-brand, .product-desc, .product-heading, .product-shipment, .product-warranty, .product-price
+.product-score
+{
+    font-size: 1.05rem;
+    color: rgb(8, 8, 8);
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+.product-brand, .product-desc, .product-heading, .product-shipment, .product-warranty, .product-price, .product-score
 {
     margin-left: 13px;
 }

@@ -7,7 +7,7 @@ export default function Product() {
 
     useEffect(() => {
         // Fetch products from backend when the component mounts
-        axios.get('https://backend-catalogue.onrender.com/api')
+        axios.get('http://localhost:5000/api')
             .then(response => {
                 // Set the products state with the data received from the backend
                 setProducts(response.data);
@@ -29,7 +29,7 @@ export default function Product() {
                     <h2 className='product-price'>Price : {product.price}</h2>
                     <p className='product-warranty'><b>Warranty</b> : {product.warranty}</p>
                     <p className='product-shipment'><b>Shipment</b> : {product.shipment}</p>
-                    {/* <h2 className='product-score'>Overall Score : {product.score}</h2> */}
+                    <h2 className='product-score'>Overall Score : {product.score} / 10</h2>
                 </div>
             ))}
         </div>

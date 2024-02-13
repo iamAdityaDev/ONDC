@@ -15,7 +15,7 @@ function Suggestion(props) {
   const handleRegister = () => {
     const { heading, desc, brand, price, warranty, offline, shipment, availability } = props.productInfo;
     
-    axios.post('https://backend-catalogue.onrender.com/api/addProduct', {
+    axios.post('http://localhost:5000/api/addProduct', {
       heading,
       desc,
       price,
