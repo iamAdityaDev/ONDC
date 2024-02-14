@@ -55,7 +55,7 @@ app.post("/api/addProduct", async (req, res) => {
 
         The score should incorporate various attributes provided in a product carrying information: heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}, and availability: ${availability}., ensuring accuracy to differentiate and rank similar productsThe scoring process must adhere to a specific priority order:
 
-        Product Description and Name: This is the most crucial factor in determining the score. The comprehensiveness and informativeness of the product description significantly impact the rating. A clear and detailed description helps customers understand the product better, leading to a higher score.
+        Product Description and Name is the biggest deciding factor for evaluating score: This is the most crucial factor in determining the score. The comprehensiveness and informativeness of the product description significantly impact the rating. A clear and detailed description helps customers understand the product better, leading to a higher score.
         
         Price: The pricing of the product plays a significant role in its overall score. It's essential to ensure that the price is practical and reasonable. Unrealistically high prices can negatively affect the score, while competitive pricing can lead to a higher rating.
         
