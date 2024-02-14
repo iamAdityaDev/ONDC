@@ -82,6 +82,83 @@ app.post("/api/addProduct", async (req, res) => {
         Also take reference to this data
 
         {
+          "category": "Electronics",
+          "heading": "Dell XPS 13 Laptop",
+          "desc": "13.4 inch FHD+ InfinityEdge Display, Intel Core i7, 16GB RAM, 512GB SSD, Windows 11",
+          "price": "120000",
+          "brand": "Dell",
+          "score": "9",
+          "warranty": "Yes, 3 years warranty",
+          "offline": "Yes",
+          "shipment": "Local"
+        },
+        {
+          "category": "Electronics",
+          "heading": "Lenovo ThinkPad X1 Carbon",
+          "desc": "14 inch 4K HDR Display, Intel Core i5, 16GB RAM, 512GB SSD, Windows 11 Pro",
+          "price": "135000",
+          "brand": "Lenovo",
+          "score": "7.8",
+          "warranty": "Yes, 5 years warranty",
+          "offline": "Yes",
+          "shipment": "International"
+        },
+        {
+          "category": "Electronics",
+          "heading": "HP Spectre x360 Convertible Laptop",
+          "desc": "15.6 inch 4K OLED Touchscreen, Intel Core i9, 32GB RAM, 1TB SSD, Windows 11",
+          "price": "180000",
+          "brand": "HP",
+          "score": "9.2",
+          "warranty": "Yes, 2 years warranty",
+          "offline": "No",
+          "shipment": "Local"
+        },
+        {
+          "category": "Electronics",
+          "heading": "Asus ROG Zephyrus G14 Gaming Laptop",
+          "desc": "14 inch QHD Display, AMD Ryzen 9, 32GB RAM, 1TB SSD, NVIDIA GeForce RTX 3080",
+          "price": "200000",
+          "brand": "Asus",
+          "score": "8.9",
+          "warranty": "Yes, 2 years warranty",
+          "offline": "Yes",
+          "shipment": "International"
+        },
+        {
+          "category": "Clothes",
+          "heading": "Men's Formal Suit",
+          "desc": "Premium quality tailored suit for formal occasions",
+          "price": "50000",
+          "brand": "TailorMade",
+          "score": "8.1",
+          "warranty": "No",
+          "offline": "Yes",
+          "shipment": "Local"
+        },
+        {
+          "category": "Food",
+          "heading": "Gourmet Cheese Collection",
+          "desc": "Assorted gourmet cheese selection from around the world",
+          "price": "15000",
+          "brand": "CheeseLuxe",
+          "score": "8.5",
+          "warranty": "No",
+          "offline": "No",
+          "shipment": "Local"
+        },
+        {
+          "category": "Accessories",
+          "heading": "Smartwatch",
+          "desc": "High-tech smartwatch with health and fitness tracking features",
+          "price": "25000",
+          "brand": "TechWear",
+          "score": "7.6",
+          "warranty": "Yes, 1 year warranty",
+          "offline": "Yes",
+          "shipment": "Local"
+        }
+        {
           "heading": "Dell XPS 13 Laptop",
           "desc": "13.4 inch FHD+ InfinityEdge Display, Intel Core i7, 16GB RAM, 512GB SSD, Windows 11",
           "price": "120000",
@@ -122,46 +199,6 @@ app.post("/api/addProduct", async (req, res) => {
           "shipment": "International"
         },
         {
-          "heading": "Microsoft Surface Laptop 4",
-          "desc": "13.5 inch PixelSense Touchscreen, Intel Core i7, 16GB RAM, 512GB SSD, Windows 11 Pro",
-          "price": "150000",
-          "brand": "Microsoft",
-          "score": "8.7",
-          "warranty": "Yes, 4 years warranty",
-          "offline": "No",
-          "shipment": "Local"
-        },
-        {
-          "heading": "Razer Blade 15 Gaming Laptop",
-          "desc": "15.6 inch FHD Display, Intel Core i7, 16GB RAM, 1TB SSD, NVIDIA GeForce RTX 3070",
-          "price": "170000",
-          "brand": "Razer",
-          "score": "9.2",
-          "warranty": "Yes, 2 years warranty",
-          "offline": "Yes",
-          "shipment": "International"
-        },
-        {
-          "heading": "Samsung Galaxy Book Pro 360",
-          "desc": "15.6 inch AMOLED Touchscreen, Intel Core i7, 16GB RAM, 1TB SSD, Windows 11",
-          "price": "160000",
-          "brand": "Samsung",
-          "score": "8.8",
-          "warranty": "Yes, 3 years warranty",
-          "offline": "No",
-          "shipment": "Local"
-        },
-        {
-          "heading": "LG Gram 17 Laptop",
-          "desc": "17 inch WQXGA IPS Display, Intel Core i5, 16GB RAM, 512GB SSD, Windows 11",
-          "price": "140000",
-          "brand": "LG",
-          "score": "8.0",
-          "warranty": "Yes, 2 years warranty",
-          "offline": "Yes",
-          "shipment": "International"
-        },
-        {
           "heading": "Gaming Laptop",
           "desc": "Very fast and smooth",
           "price": "67,999 Rs",
@@ -190,86 +227,7 @@ app.post("/api/addProduct", async (req, res) => {
           "warranty": "1 year",
           "offline": "yes",
           "shipment": ""
-        },
-        
-          {
-            "category": "Electronics",
-            "heading": "Dell XPS 13 Laptop",
-            "desc": "13.4 inch FHD+ InfinityEdge Display, Intel Core i7, 16GB RAM, 512GB SSD, Windows 11",
-            "price": "120000",
-            "brand": "Dell",
-            "score": "9",
-            "warranty": "Yes, 3 years warranty",
-            "offline": "Yes",
-            "shipment": "Local"
-          },
-          {
-            "category": "Electronics",
-            "heading": "Lenovo ThinkPad X1 Carbon",
-            "desc": "14 inch 4K HDR Display, Intel Core i5, 16GB RAM, 512GB SSD, Windows 11 Pro",
-            "price": "135000",
-            "brand": "Lenovo",
-            "score": "7.8",
-            "warranty": "Yes, 5 years warranty",
-            "offline": "Yes",
-            "shipment": "International"
-          },
-          {
-            "category": "Electronics",
-            "heading": "HP Spectre x360 Convertible Laptop",
-            "desc": "15.6 inch 4K OLED Touchscreen, Intel Core i9, 32GB RAM, 1TB SSD, Windows 11",
-            "price": "180000",
-            "brand": "HP",
-            "score": "9.2",
-            "warranty": "Yes, 2 years warranty",
-            "offline": "No",
-            "shipment": "Local"
-          },
-          {
-            "category": "Electronics",
-            "heading": "Asus ROG Zephyrus G14 Gaming Laptop",
-            "desc": "14 inch QHD Display, AMD Ryzen 9, 32GB RAM, 1TB SSD, NVIDIA GeForce RTX 3080",
-            "price": "200000",
-            "brand": "Asus",
-            "score": "8.9",
-            "warranty": "Yes, 2 years warranty",
-            "offline": "Yes",
-            "shipment": "International"
-          },
-          {
-            "category": "Clothes",
-            "heading": "Men's Formal Suit",
-            "desc": "Premium quality tailored suit for formal occasions",
-            "price": "50000",
-            "brand": "TailorMade",
-            "score": "8.1",
-            "warranty": "No",
-            "offline": "Yes",
-            "shipment": "Local"
-          },
-          {
-            "category": "Food",
-            "heading": "Gourmet Cheese Collection",
-            "desc": "Assorted gourmet cheese selection from around the world",
-            "price": "15000",
-            "brand": "CheeseLuxe",
-            "score": "8.5",
-            "warranty": "No",
-            "offline": "No",
-            "shipment": "Local"
-          },
-          {
-            "category": "Accessories",
-            "heading": "Smartwatch",
-            "desc": "High-tech smartwatch with health and fitness tracking features",
-            "price": "25000",
-            "brand": "TechWear",
-            "score": "7.6",
-            "warranty": "Yes, 1 year warranty",
-            "offline": "Yes",
-            "shipment": "Local"
-          }
-        
+        }
         Output the final score in the format: 2.1, 4, 7.8, etc., where decimal numbers may be used for precision in the scoring process.
         
         **Note : You just have to strictly generate a score from 1-10 as a number as in the format of (2.1, 4, 7.8), no other characters should be there, from the format that I suggested.`;
