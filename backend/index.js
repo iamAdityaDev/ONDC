@@ -238,10 +238,10 @@ app.post("/api/addProduct", async (req, res) => {
     const score = generatedResponse.text();
 
     // Read existing products from the JSON file
-    const data = fs.readFileSync(
-      "../frontend/src/assets/products.json",
-      "utf8"
-    );
+    // const data = fs.readFileSync(
+    //   "../frontend/src/assets/products.json",
+    //   "utf8"
+    // );
     let products = JSON.parse(data);
 
     // Append new product to the array
@@ -258,10 +258,11 @@ app.post("/api/addProduct", async (req, res) => {
 
     // Write the updated array back to the JSON file
     fs.writeFileSync(
-      "../frontend/src/assets/products.json",
+      "./products.json",
       JSON.stringify(products, null, 2),
       "utf8"
     );
+    // const data = fs.readFileSync("./products.json", "utf8");
 
     res.status(200).send("Product added successfully");
   } catch (error) {
