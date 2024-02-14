@@ -242,6 +242,7 @@ app.post("/api/addProduct", async (req, res) => {
     //   "../frontend/src/assets/products.json",
     //   "utf8"
     // );
+    const data = fs.readFileSync("./products.json", "utf8");
     let products = JSON.parse(data);
 
     // Append new product to the array
