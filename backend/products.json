@@ -9,5 +9,101 @@
       "warranty": "Yes, 3 years warranty",
       "offline": "Yes",
       "shipment": "Local"
+    },
+    {
+      "category": "Electronics",
+      "heading": "Lenovo ThinkPad X1 Carbon",
+      "desc": "14 inch 4K HDR Display, Intel Core i5, 16GB RAM, 512GB SSD, Windows 11 Pro",
+      "price": "135000",
+      "brand": "Lenovo",
+      "score": "7.8",
+      "warranty": "Yes, 5 years warranty",
+      "offline": "Yes",
+      "shipment": "International"
+    },
+    {
+      "category": "Electronics",
+      "heading": "HP Spectre x360 Convertible Laptop",
+      "desc": "15.6 inch 4K OLED Touchscreen, Intel Core i9, 32GB RAM, 1TB SSD, Windows 11",
+      "price": "180000",
+      "brand": "HP",
+      "score": "9.2",
+      "warranty": "Yes, 2 years warranty",
+      "offline": "No",
+      "shipment": "Local"
+    },
+    {
+      "category": "Electronics",
+      "heading": "Asus ROG Zephyrus G14 Gaming Laptop",
+      "desc": "14 inch QHD Display, AMD Ryzen 9, 32GB RAM, 1TB SSD, NVIDIA GeForce RTX 3080",
+      "price": "200000",
+      "brand": "Asus",
+      "score": "8.9",
+      "warranty": "Yes, 2 years warranty",
+      "offline": "Yes",
+      "shipment": "International"
+    },
+    {
+      "category": "Clothes",
+      "heading": "Men's Formal Suit",
+      "desc": "Premium quality tailored suit for formal occasions",
+      "price": "50000",
+      "brand": "TailorMade",
+      "score": "8.1",
+      "warranty": "No",
+      "offline": "Yes",
+      "shipment": "Local"
+    },
+    {
+      "category": "Food",
+      "heading": "Gourmet Cheese Collection",
+      "desc": "Assorted gourmet cheese selection from around the world",
+      "price": "15000",
+      "brand": "CheeseLuxe",
+      "score": "8.5",
+      "warranty": "No",
+      "offline": "No",
+      "shipment": "Local"
+    },
+    {
+      "category": "Accessories",
+      "heading": "Smartwatch",
+      "desc": "High-tech smartwatch with health and fitness tracking features",
+      "price": "25000",
+      "brand": "TechWear",
+      "score": "7.6",
+      "warranty": "Yes, 1 year warranty",
+      "offline": "Yes",
+      "shipment": "Local"
+    },
+    {
+      "heading": "T-shirt",
+      "desc": "good comfort",
+      "price": "2000 Rs",
+      "brand": "Bunchumps",
+      "score": "2.1",
+      "warranty": "",
+      "offline": "",
+      "shipment": ""
+    },
+    {
+      "heading": "tshirt",
+      "desc": "good",
+      "price": "3000 Rs",
+      "brand": "addidas",
+      "score": "2.8",
+      "warranty": "",
+      "offline": "",
+      "shipment": ""
+    },
+    {
+      "heading": "bottle",
+      "desc": "good",
+      "price": "700 Rs",
+      "brand": "Milton",
+      "score": "2.2",
+      "warranty": "",
+      "offline": "",
+      "shipment": ""
     }
   ]
