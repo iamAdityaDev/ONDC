@@ -75,5 +75,35 @@
     "warranty": "Yes, 1 year warranty",
     "offline": "Yes",
     "shipment": "Local"
+  },
+  {
+    "heading": "T-shirt",
+    "desc": "good comfort",
+    "price": "2000 Rs",
+    "brand": "Bunchumps",
+    "score": "2.1",
+    "warranty": "",
+    "offline": "",
+    "shipment": ""
+  },
+  {
+    "heading": "tshirt",
+    "desc": "good",
+    "price": "3000 Rs",
+    "brand": "addidas",
+    "score": "5.3",
+    "warranty": "",
+    "offline": "",
+    "shipment": ""
+  },
+  {
+    "heading": "bottle",
+    "desc": "good",
+    "price": "700 Rs",
+    "brand": "Milton",
+    "score": "7.2",
+    "warranty": "",
+    "offline": "",
+    "shipment": ""
   }
 ]
