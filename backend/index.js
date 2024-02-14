@@ -20,10 +20,11 @@ app.get("/", (req, res) => {
 app.get("/api/", (req, res) => {
   try {
     // Read products from the JSON file
-    const data = fs.readFileSync(
-      "../frontend/src/assets/products.json",
-      "utf8"
-    );
+    // const data = fs.readFileSync(
+    //   "../frontend/src/assets/products.json",
+    //   "utf8"
+    // );
+    const data = fs.readFileSync("./products.json", "utf8");
     let products = JSON.parse(data);
 
     // Sort products based on their scores
