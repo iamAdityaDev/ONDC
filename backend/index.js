@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const fs = require("fs");
-const { GoogleGenerativeAI } = require('@google/generative-ai');
-const api = 'AIzaSyDT__9TFdPA53ZAzP_l30ScEiEl-Caz_yM';
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const api = "AIzaSyDT__9TFdPA53ZAzP_l30ScEiEl-Caz_yM";
 const genAI = new GoogleGenerativeAI(api);
 
 const app = express();
@@ -13,14 +13,17 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/',(req,res)=>{
-  res.status(200).send('Welcome to Catalogue Scoring - ONDC backend!');
+app.get("/", (req, res) => {
+  res.status(200).send("Welcome to Catalogue Scoring - ONDC backend!");
 });
 
-app.get('/api/', (req, res) => {
+app.get("/api/", (req, res) => {
   try {
     // Read products from the JSON file
-    const data = fs.readFileSync('../frontend/src/assets/products.json', 'utf8');
+    const data = fs.readFileSync(
+      "../frontend/src/assets/products.json",
+      "utf8"
+    );
     let products = JSON.parse(data);
 
     // Sort products based on their scores
@@ -29,16 +32,25 @@ app.get('/api/', (req, res) => {
     // Send the sorted products as response
     res.status(200).json(products);
   } catch (error) {
-    console.error('Error fetching products:', error);
-    res.status(500).send('Internal Server Error');
+    console.error("Error fetching products:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
-app.post('/api/addProduct', async (req, res) => {
-  const { heading, desc, price, brand, warranty, offline, shipment, availability } = req.body;
+app.post("/api/addProduct", async (req, res) => {
+  const {
+    heading,
+    desc,
+    price,
+    brand,
+    warranty,
+    offline,
+    shipment,
+    availability,
+  } = req.body;
   try {
     // Generate score using AI model
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = `Provide an overall score for the product on a scale of 1 to 10. 
 
         The score should incorporate various attributes provided in a product carrying information: heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}, and availability: ${availability}., ensuring accuracy to differentiate and rank similar productsThe scoring process must adhere to a specific priority order:
@@ -178,7 +190,85 @@ app.post('/api/addProduct', async (req, res) => {
           "warranty": "1 year",
           "offline": "yes",
           "shipment": ""
-        }
+        },
+        
+          {
+            "category": "Electronics",
+            "heading": "Dell XPS 13 Laptop",
+            "desc": "13.4 inch FHD+ InfinityEdge Display, Intel Core i7, 16GB RAM, 512GB SSD, Windows 11",
+            "price": "120000",
+            "brand": "Dell",
+            "score": "9",
+            "warranty": "Yes, 3 years warranty",
+            "offline": "Yes",
+            "shipment": "Local"
+          },
+          {
+            "category": "Electronics",
+            "heading": "Lenovo ThinkPad X1 Carbon",
+            "desc": "14 inch 4K HDR Display, Intel Core i5, 16GB RAM, 512GB SSD, Windows 11 Pro",
+            "price": "135000",
+            "brand": "Lenovo",
+            "score": "7.8",
+            "warranty": "Yes, 5 years warranty",
+            "offline": "Yes",
+            "shipment": "International"
+          },
+          {
+            "category": "Electronics",
+            "heading": "HP Spectre x360 Convertible Laptop",
+            "desc": "15.6 inch 4K OLED Touchscreen, Intel Core i9, 32GB RAM, 1TB SSD, Windows 11",
+            "price": "180000",
+            "brand": "HP",
+            "score": "9.2",
+            "warranty": "Yes, 2 years warranty",
+            "offline": "No",
+            "shipment": "Local"
+          },
+          {
+            "category": "Electronics",
+            "heading": "Asus ROG Zephyrus G14 Gaming Laptop",
+            "desc": "14 inch QHD Display, AMD Ryzen 9, 32GB RAM, 1TB SSD, NVIDIA GeForce RTX 3080",
+            "price": "200000",
+            "brand": "Asus",
+            "score": "8.9",
+            "warranty": "Yes, 2 years warranty",
+            "offline": "Yes",
+            "shipment": "International"
+          },
+          {
+            "category": "Clothes",
+            "heading": "Men's Formal Suit",
+            "desc": "Premium quality tailored suit for formal occasions",
+            "price": "50000",
+            "brand": "TailorMade",
+            "score": "8.1",
+            "warranty": "No",
+            "offline": "Yes",
+            "shipment": "Local"
+          },
+          {
+            "category": "Food",
+            "heading": "Gourmet Cheese Collection",
+            "desc": "Assorted gourmet cheese selection from around the world",
+            "price": "15000",
+            "brand": "CheeseLuxe",
+            "score": "8.5",
+            "warranty": "No",
+            "offline": "No",
+            "shipment": "Local"
+          },
+          {
+            "category": "Accessories",
+            "heading": "Smartwatch",
+            "desc": "High-tech smartwatch with health and fitness tracking features",
+            "price": "25000",
+            "brand": "TechWear",
+            "score": "7.6",
+            "warranty": "Yes, 1 year warranty",
+            "offline": "Yes",
+            "shipment": "Local"
+          }
         
         Output the final score in the format: 2.1, 4, 7.8, etc., where decimal numbers may be used for precision in the scoring process.
         
@@ -189,134 +279,150 @@ app.post('/api/addProduct', async (req, res) => {
     const score = generatedResponse.text();
 
     // Read existing products from the JSON file
-    const data = fs.readFileSync('../frontend/src/assets/products.json', 'utf8');
+    const data = fs.readFileSync(
+      "../frontend/src/assets/products.json",
+      "utf8"
+    );
     let products = JSON.parse(data);
 
     // Append new product to the array
-    products.push({ heading, desc, price, brand, score, warranty, offline, shipment });
+    products.push({
+      heading,
+      desc,
+      price,
+      brand,
+      score,
+      warranty,
+      offline,
+      shipment,
+    });
 
     // Write the updated array back to the JSON file
-    fs.writeFileSync('../frontend/src/assets/products.json', JSON.stringify(products, null, 2), 'utf8');
+    fs.writeFileSync(
+      "../frontend/src/assets/products.json",
+      JSON.stringify(products, null, 2),
+      "utf8"
+    );
 
-    res.status(200).send('Product added successfully');
+    res.status(200).send("Product added successfully");
   } catch (error) {
-    console.error('Error adding product:', error);
-    res.status(500).send('Internal Server Error');
+    console.error("Error adding product:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
-app.post('/api/suggestName', async(req,res) => {
+app.post("/api/suggestName", async (req, res) => {
   const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
 
     Identify limitations in this product and suggest improvements that can be made in product name by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
-    `
+    `;
 
     const result = await model.generateContent(prompt);
     const generatedResponse = await result.response;
 
     res.status(200).send(generatedResponse.text());
   } catch (error) {
-    console.error('Error adding product:', error);
-    res.status(500).send('Internal Server Error');
+    console.error("Error adding product:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
-app.post('/api/suggestDesc', async(req,res) => {
+app.post("/api/suggestDesc", async (req, res) => {
   const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
 
     Identify limitations in this product and suggest improvements that can be made in product Description by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
-    `
+    `;
 
     const result = await model.generateContent(prompt);
     const generatedResponse = await result.response;
 
     res.status(200).send(generatedResponse.text());
   } catch (error) {
-    console.error('Error adding product:', error);
-    res.status(500).send('Internal Server Error');
+    console.error("Error adding product:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
-app.post('/api/suggestPrice', async(req,res) => {
+app.post("/api/suggestPrice", async (req, res) => {
   const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
     Identify limitations in this product and suggest improvements that can be made in product pricing by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
-    `
+    `;
 
     const result = await model.generateContent(prompt);
     const generatedResponse = await result.response;
 
     res.status(200).send(generatedResponse.text());
   } catch (error) {
-    console.error('Error adding product:', error);
-    res.status(500).send('Internal Server Error');
+    console.error("Error adding product:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
-app.post('/api/suggestWarranty', async(req,res) => {
+app.post("/api/suggestWarranty", async (req, res) => {
   const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
 
     Identify limitations in this product and suggest improvements that can be made in product warranty by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
-    `
+    `;
 
     const result = await model.generateContent(prompt);
     const generatedResponse = await result.response;
 
     res.status(200).send(generatedResponse.text());
   } catch (error) {
-    console.error('Error adding product:', error);
-    res.status(500).send('Internal Server Error');
+    console.error("Error adding product:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
-app.post('/api/suggestOffline', async(req,res) => {
+app.post("/api/suggestOffline", async (req, res) => {
   const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
 
     Identify limitations in this product and suggest improvements that can be made in offline assistance of the product by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
-    `
+    `;
 
     const result = await model.generateContent(prompt);
     const generatedResponse = await result.response;
 
     res.status(200).send(generatedResponse.text());
   } catch (error) {
-    console.error('Error adding product:', error);
-    res.status(500).send('Internal Server Error');
+    console.error("Error adding product:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
-app.post('/api/suggestShipment', async(req,res) => {
+app.post("/api/suggestShipment", async (req, res) => {
   const { heading, desc, price, brand, warranty, offline, shipment } = req.body;
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = `Consider the following data of a product:
     heading: ${heading}, description: ${desc}, price: ${price}, brand: ${brand}, warranty information: ${warranty}, offline assistance: ${offline}, shipment details: ${shipment}
 
     Identify limitations in this product and suggest improvements that can be made in product shipment by considering if there is irrelevant information about the attribute and incomplete information. Compare changes with similar products existing in the market, remember I need this suggestion should be smart and of 1 line.
-    `
+    `;
 
     const result = await model.generateContent(prompt);
     const generatedResponse = await result.response;
 
     res.status(200).send(generatedResponse.text());
   } catch (error) {
-    console.error('Error adding product:', error);
-    res.status(500).send('Internal Server Error');
+    console.error("Error adding product:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
 
