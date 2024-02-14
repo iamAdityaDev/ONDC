@@ -44,7 +44,7 @@ function RegisterProduct() {
 
   const fetchHeadingInfo = async() => {
     try {
-      const response = await axios.post('http://localhost:5000/api/suggestName', productInfo);
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestName', productInfo);
       setHeadingInfo(response.data);
     } catch (error) {
       console.log(error);
@@ -52,7 +52,7 @@ function RegisterProduct() {
   };
   const fetchDescInfo = async() => {
     try {
-      const response = await axios.post('http://localhost:5000/api/suggestDesc', productInfo);
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestDesc', productInfo);
       setDescInfo(response.data);
     } catch (error) {
       console.log(error);
@@ -60,7 +60,7 @@ function RegisterProduct() {
   };
   const fetchPriceInfo = async() => {
     try {
-      const response = await axios.post('http://localhost:5000/api/suggestPrice', productInfo);
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestPrice', productInfo);
       setPriceInfo(response.data);
     } catch (error) {
       console.log(error);
@@ -68,7 +68,7 @@ function RegisterProduct() {
   };
   const fetchWarrantyInfo = async() => {
     try {
-      const response = await axios.post('http://localhost:5000/api/suggestWarranty', productInfo);
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestWarranty', productInfo);
       setWarrantyInfo(response.data);
     } catch (error) {
       console.log(error);
@@ -76,7 +76,7 @@ function RegisterProduct() {
   };
   const fetchOfflineInfo = async() => {
     try {
-      const response = await axios.post('http://localhost:5000/api/suggestOffline', productInfo);
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestOffline', productInfo);
       setOfflineInfo(response.data);
     } catch (error) {
       console.log(error);
@@ -84,7 +84,7 @@ function RegisterProduct() {
   };
   const fetchShipmentInfo = async() => {
     try {
-      const response = await axios.post('http://localhost:5000/api/suggestShipment', productInfo);
+      const response = await axios.post('https://backend-catalogue.onrender.com/api/suggestShipment', productInfo);
       setShipmentInfo(response.data);
     } catch (error) {
       console.log(error);
